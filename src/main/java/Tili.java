@@ -15,7 +15,9 @@ abstract class Tili {
         return this.haltija;
     }
 
-
+    int getId() {
+        return this.tiliId;
+    }
 
 
 
