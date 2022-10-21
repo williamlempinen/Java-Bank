@@ -6,7 +6,7 @@ public class Kayttotili extends Tili{
     private String salasana;
     private int summa;
     private Stack<TILITAPAHTUMA>tilitapahtumat;
-    private ArrayList<Integer> tilitapahtumatApu; //tämä voisi olla stack missä map sisällä ja sen sisällä tilitapahtuma + int
+    private ArrayList<String> tilitapahtumatApu; //tämä voisi olla stack missä map sisällä ja sen sisällä tilitapahtuma + int
 
     public Kayttotili(String haltija, int tiliId, String salasana) {
         super(haltija, tiliId);
@@ -39,23 +39,22 @@ public class Kayttotili extends Tili{
     void teeTilitapahtuma(TILITAPAHTUMA tapahtuma) {
         Scanner x = new Scanner(System.in);
         if (tapahtuma.equals(TILITAPAHTUMA.ULOSOTTO)) {
-            System.out.println("Kirjoita haluamasi määrä: ");
+            System.out.println("Kirjoita ulosotettava määrä: ");
             int inputMaara = Integer.valueOf(x.nextLine());
             if (inputMaara > summa) {
                 throw new RuntimeException("Tilillä ei ole tarpeeksi katetta."); // oma execption
             } else {
                 summa -= inputMaara;
                 tilitapahtumat.add(tapahtuma);
-                tilitapahtumatApu.add(inputMaara);
+                tilitapahtumatApu.add("- " + inputMaara);
             }
         } else {
-            System.out.println("Kirjoita haluamasi määrä: ");
+            System.out.println("Kirjoita talletettava määrä: ");
             int inputMaara = Integer.valueOf(x.nextLine());
             summa += inputMaara;
             tilitapahtumat.add(tapahtuma);
-            tilitapahtumatApu.add(inputMaara);
+            tilitapahtumatApu.add("+ " + inputMaara);
         }
-
     }
 
     void tiliHistoria() {
@@ -64,6 +63,7 @@ public class Kayttotili extends Tili{
             System.out.println(i + " " + tilitapahtumatApu.get(index)); //päivämäärät
             index++;
         }
+        System.out.println("Jäljellä oleva määrä: " + this.getSumma());
     }
 
 
