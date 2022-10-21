@@ -6,7 +6,7 @@ public class Kayttotili extends Tili{
     private String salasana;
     private int summa;
     private Stack<TILITAPAHTUMA>tilitapahtumat;
-    private ArrayList<String> tilitapahtumatApu; //tämä voisi olla stack missä map sisällä ja sen sisällä tilitapahtuma + int
+    private ArrayList<String> tilitapahtumatApu;
 
     public Kayttotili(String haltija, int tiliId, String salasana) {
         super(haltija, tiliId);
