@@ -6,7 +6,7 @@ abstract class Tili {
     private int tiliId;
 
 
-    public Tili(String haltija, int tiliId) {
+    Tili(String haltija, int tiliId) {
         this.haltija = haltija;
         this.tiliId = tiliId;
     }

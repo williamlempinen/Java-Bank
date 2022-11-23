@@ -4,21 +4,21 @@ public class Kayttotili extends Tili{
     //Käyttötilille ominaisia asioita
 
     private String salasana;
-    private int summa;
+    private int saldo;
     private Stack<TILITAPAHTUMA>tilitapahtumat;
     private ArrayList<String> tilitapahtumatApu;
 
     public Kayttotili(String haltija, int tiliId, String salasana) {
         super(haltija, tiliId);
         this.salasana = salasana;
-        summa = 0;
+        saldo = 0;
         tilitapahtumat = new Stack<>();
         tilitapahtumatApu = new ArrayList<>();
     }
 
     //RESULT == tilillä summa
-    int getSumma() {
-        return this.summa;
+    int getSaldo() {
+        return this.saldo;
     }
 
     void setSalasana() {
@@ -27,7 +27,7 @@ public class Kayttotili extends Tili{
         String inputNimi = x.nextLine();
         if (inputNimi.equals(super.getHaltija())) {
             System.out.println("Tilin id numero: ");
-            int inputId = Integer.valueOf(x.nextLine());
+            int inputId = Integer.parseInt(x.nextLine());
             if (inputId == super.getId()) {
                 System.out.println("Anna uusi salasana: ");     //try-catchia tänne + salasana ehtoja
                 String uusiSalasana = x.nextLine();             // else:jä
@@ -36,22 +36,22 @@ public class Kayttotili extends Tili{
         }
     }
 
-    void teeTilitapahtuma(TILITAPAHTUMA tapahtuma) {
+    void teeTilitapahtuma(TILITAPAHTUMA tapahtuma) throws SaldoVirhe {
         Scanner x = new Scanner(System.in);
         if (tapahtuma.equals(TILITAPAHTUMA.ULOSOTTO)) {
             System.out.println("Kirjoita ulosotettava määrä: ");
-            int inputMaara = Integer.valueOf(x.nextLine());
-            if (inputMaara > summa) {
-                throw new RuntimeException("Tilillä ei ole tarpeeksi katetta."); // oma execption
+            int inputMaara = Integer.parseInt(x.nextLine());
+            if (inputMaara > saldo) {
+                throw new SaldoVirhe("Tilillä ei ole tarpeeksi katetta.");
             } else {
-                summa -= inputMaara;
+                saldo -= inputMaara;
                 tilitapahtumat.add(tapahtuma);
                 tilitapahtumatApu.add("- " + inputMaara);
             }
         } else {
             System.out.println("Kirjoita talletettava määrä: ");
-            int inputMaara = Integer.valueOf(x.nextLine());
-            summa += inputMaara;
+            int inputMaara = Integer.parseInt(x.nextLine());
+            saldo += inputMaara;
             tilitapahtumat.add(tapahtuma);
             tilitapahtumatApu.add("+ " + inputMaara);
         }
@@ -63,7 +63,7 @@ public class Kayttotili extends Tili{
             System.out.println(i + " " + tilitapahtumatApu.get(index)); //päivämäärät
             index++;
         }
-        System.out.println("Jäljellä oleva määrä: " + this.getSumma());
+        System.out.println("Jäljellä oleva määrä: " + this.getSaldo());
     }
 
 
