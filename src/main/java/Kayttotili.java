@@ -14,6 +14,7 @@ public class Kayttotili extends Tili{
         saldo = 0;
         tilitapahtumat = new Stack<>();
         tilitapahtumatApu = new ArrayList<>();
+        asiakasTilit.put(haltija + "[käyttötili]", tiliId);
     }
 
     //RESULT == tilillä summa
@@ -21,17 +22,27 @@ public class Kayttotili extends Tili{
         return this.saldo;
     }
 
-    void setSalasana() {
+    String getSalasana() {
+        return this.salasana;
+    }
+
+    void setUusiSalasana() {
         Scanner x = new Scanner(System.in);
         System.out.println("Tilin haltijan nimi: ");
         String inputNimi = x.nextLine();
-        if (inputNimi.equals(super.getHaltija())) {
-            System.out.println("Tilin id numero: ");
-            int inputId = Integer.parseInt(x.nextLine());
-            if (inputId == super.getId()) {
-                System.out.println("Anna uusi salasana: ");     //try-catchia tänne + salasana ehtoja
-                String uusiSalasana = x.nextLine();             // else:jä
-                salasana = uusiSalasana;
+
+        for (var i : asiakasTilit.keySet()) {
+            if (inputNimi.equals(i)) {
+                System.out.println("Tili löytyi.");
+                System.out.println("Syötä salasana: ");
+                String inputSalasana = x.nextLine();
+                if (inputSalasana.equals(this.getSalasana())) {
+                    System.out.println("Anna uusi salasana: ");     //try-catchia tänne + salasana ehtoja
+                    String uusiSalasana = x.nextLine();             // else:jä
+                    salasana = uusiSalasana;
+                }
+            } else {
+                System.out.println("Asiakasta ei löytynyt järjestelmästä.");
             }
         }
     }
