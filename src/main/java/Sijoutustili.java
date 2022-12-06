@@ -8,11 +8,13 @@ public class Sijoutustili extends Tili{
     private String salasana;
     private HashMap<OSAKKEET, Double> omistukset;
     private Kayttotili käyttöTili;
+    private Integer saldo;
 
     public Sijoutustili(String haltija, int tiliId, String salasana) {
         super(haltija, tiliId);
         this.salasana = salasana;
         this.käyttöTili = null;
+        this.saldo = 0;
         omistukset = new HashMap<>();
         asiakasTilit.put(this.getHaltija() + "[sijoitustili]", this.getId());
     }
@@ -40,13 +42,20 @@ public class Sijoutustili extends Tili{
         }
     }
 
-    void ostaOsakkeita(OSAKKEET osake, Double maara) {
-        if (omistukset.containsKey(osake)) {
-            double m = omistukset.get(osake);
-            m + maara = omistukset.get(osake);
-            käyttöTili.getSaldo() -= maara;
-        }
+    int getSaldo() {
+        return this.saldo;
     }
+
+    void talletaRahaa(int määrä) {
+        this.saldo += määrä;
+        System.out.println("Tilillä rahaa: " + this.saldo);
+    }
+
+    void ostaOsakkeita(OSAKKEET osake, Double maara) {
+
+    }
+
+
 
     void getOmistukset() {
         for (var i : omistukset.keySet()) {

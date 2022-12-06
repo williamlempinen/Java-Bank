@@ -4,7 +4,7 @@ public class Kayttotili extends Tili{
     //Käyttötilille ominaisia asioita
 
     private String salasana;
-    private int saldo;
+    private Integer saldo;
     private Stack<TILITAPAHTUMA>tilitapahtumat;
     private ArrayList<String> tilitapahtumatApu;
 

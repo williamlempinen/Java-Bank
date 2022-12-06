@@ -27,6 +27,8 @@ public class Main {
 
         Sijoutustili stest1 = new Sijoutustili("William", 656565, "Kurpitsalehti2");
 
+        stest1.yhdistäKäyttötiliin(test1);
+
         Tili.getAsiakkaat();
 
 

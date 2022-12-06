@@ -24,7 +24,7 @@ abstract class Tili {
     }
 
      static void getAsiakkaat() {
-        System.out.println(Arrays.asList(asiakasTilit));
+        System.out.println(asiakasTilit);
     }
 
 
